@@ -127,3 +127,13 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# pycharm
+.idea
+
+# Untitled/test
+Untitled*.ipynb
+test.py
+
+# vis_module
+media/
