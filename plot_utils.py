@@ -24,12 +24,18 @@ class MetricsUtils:
         self.y_train = y_train
 
         self.y_pred = estimator.predict(self.x_test)
+        self.y_train_pred = estimator.predict(self.x_train)
 
-    def show_scores(self):
-        print(f"Accuracy: {accuracy_score(self.y_test, self.y_pred):.2f}")
-        print(f"Recall: {recall_score(self.y_test, self.y_pred):.2f}")
-        print(f"Precision: {precision_score(self.y_test, self.y_pred):.2f}")
-        print(f"Classification Report:\n{classification_report(self.y_test, self.y_pred)}")
+    def show_scores(self, test=True):
+        if test:
+            actual, pred = self.y_test, self.y_pred
+        else:
+            actual, pred = self.y_train, self.y_train_pred
+        
+        print(f"Accuracy: {accuracy_score(actual, pred):.2f}")
+        print(f"Recall: {recall_score(actual, pred):.2f}")
+        print(f"Precision: {precision_score(actual, pred):.2f}")
+        print(f"Classification Report:\n{classification_report(actual, pred)}")
 
     def show_precision_recall(self):
         y_scores = self.estimator.predict_proba(self.x_train)[:, 1]
